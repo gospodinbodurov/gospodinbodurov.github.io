@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospodin Bodurov</title>
+    <style>
+	body { 
+	  line-height: 1.4;
+	    font-size: 16px;
+	    padding: 0 10px;
+	    margin: 50px auto;
+	    max-width: 650px;
+	}
+
+	#maincontent
+	{
+	max-width:42em;margin:15 auto;
+
+	}
+	
+		img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.portrait {
+    height: 80px;
+    width: 30px;
+}
+
+.landscape {
+    height: 30px;
+    width: 80px;
+}
+
+.square {
+    height: 75px;
+    width: 75px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Days Of Future Past - Monitoring Tool for Windows 98</h2>
+        
+        <h4>Introduction</h4>
+        <p>While cleaning out one of our basements, I came across an old Compaq Deskpro EN with a PIII processor. To my surprise, it booted up effortlessly with Windows XP, despite being powered off for years. This find brought back a flood of nostalgia and a renewed appreciation for how far technology has come. Over twenty years ago, I began my programming journey with C and C++ on a Windows 98 machine using Borland C++. Inspired by this trip down memory lane, alongside the recent signs that we're <a target="_blank" href="https://www.tomshardware.com/tech-industry/semiconductors/intels-ceo-says-moores-law-is-slowing-to-a-three-year-cadence-but-its-not-dead-yet">nearing the limits of Moore's Law</a>, I decided to develop a server monitoring tool for Windows 98, using the same tools and technologies that once fueled my passion for the tech world.</p>
+
+        <p>Hardware Specs:</p>
+        <p></p><ul>
+        <li><strong>Processor:</strong> Intel Pentium III 886 MHz</li>
+        <li><strong>Chipset:</strong> Intel 815E</li>
+        <li><strong>Memory:</strong> 512 MB SDRAM</li>
+        <li><strong>Storage:</strong> 80 GB Ultra ATA/66 HDD, DVD-RW</li>
+        <li><strong>Graphics:</strong> Integrated Intel 815E with up to 32 MB shared memory</li>
+        <li><strong>Audio:</strong> Integrated SoundMax with AC'97 codec</li>
+        <li><strong>Networking:</strong> Integrated Intel PRO/100 VE LAN, 56K V.90 modem</li>
+        <li><strong>Expansion Slots:</strong> 3 PCI</li>
+        <li><strong>Ports:</strong> 2 USB, 1 parallel, 2 serial, VGA, PS/2, audio line-in/out</li>
+        <li><strong>Operating System:</strong> Windows 98, 2000, or XP (depending on model)</li>
+    </ul><p></p>
+
+        <img src="./screenshot.png">
+
+        <h4>Installing Windows 98</h4>
+        <p>I needed to recreate a Windows 98 environment. Luckily, some retro PC shops in Bulgaria helped me get my hands on original Windows 98 CDs. The installation went smoothly, but even with Windows 98 SE, I ran into a slew of hardware driver issues. Thankfully, I found a bundle of drivers for the Compaq Deskpro EN on archive.org, which resolved the video and audio driver problems (huge thanks to the founders of archive.org for saving my eyes). Windows 98 performance was way better than the Windows XP one.</p>
+        
+        <h4>Architecting a Monitoring Tool in Windows 98</h4>
+        <p>Pressed for time, I decided to keep it simple and reuse as many Windows components as possible. First, I needed a place to display the collected data. A good option was the <a target="_blank" href="https://en.wikipedia.org/wiki/Active_Desktop">Active Desktop</a> component, which allows Windows 98 users to render HTML pages on their desktops. This seems like the ancestor of today’s JavaScript plugins and components ecosystem for Microsoft software. Using the IE5 engine, it could render any HTML page and display it on the desktop. This meant that with a simple C++ program using <a target="_blank" href="https://en.wikipedia.org/wiki/Windows_Management_Instrumentation">WMI</a>, I could read the monitoring data, write it into an HTML file, and then have Active Desktop automatically render it on the screen</p>
+
+        <h4>Setting Up IDEs for C++ and HTML</h4>
+	<p>As an open-source enthusiast, I aimed to keep my development stack as open-source as possible. However, the open-source community was just beginning to evolve back then, limiting my IDE options to Code::Blocks, DJGPP, and Notepad++. Code::Blocks wouldn't start due to a missing ANSI component—it had two versions at the time, one with ANSI support and one with Unicode support. I could only find the Unicode versions, and since Windows 98 lacked Unicode support, Code::Blocks was not an option. DJGPP installed and ran fine but didn't include the Windows system headers, making it impossible to access the monitoring data. Notepad++ had the same issue as Code::Blocks, being available only in a Unicode version. This led me to turn to Borland C++, my go-to from my early programming days. The only way to get such an old version of Borland C++ was through archive.org (I figured using the free part of Borland C++ as abandonware was acceptable for this tutorial). Installing Borland C++ on Windows 98 felt like opening a time capsule, bringing me back to my school days and the first IDE I ever used.</p>
+        <img src="./screenshot1.png">
+
+        <h4>Underwater Stones and Redesign 1</h4>
+	<p>After spending several hours tinkering, debugging, and resolving issues, I've come to realize that creating a monitoring tool wasn't as straightforward as I initially thought. Along the way, I encountered several challenges. For instance, WMI is poorly supported on Windows 98. Despite installing wmi9x.exe, it lacked essential programming APIs like necessary DLLs and C++ header files needed to extract the required data. This led me to explore alternatives within the Windows kernel.</p>
+
+<p>Another hurdle I faced was with Active Desktop. The Channel Definition Format supported by Windows 98 doesn't include file URIs, prompting me to install the default <a target="_blank" href="https://en.wikipedia.org/wiki/Microsoft_Personal_Web_Server">PWS (Personal Web Server)</a> component of Windows 98. This allowed me to serve HTML content locally using its built-in web server. PWS, a lightweight version of Microsoft's standard IIS web server, was surprisingly robust considering it was bundled with client operating systems like Windows 98.</p>
+
+
+<p>It's fascinating to see how Windows was already quite development-oriented back then, even including a functional web server component out of the box.</p>
+        <img src="./screenshot3.png">
+
+        <h4>Underwater Stones and Redesign 2</h4>
+<p>After setting up the web server I successfully loaded the required pages. However, a new issue arose: the scheduling capabilities of the <a target="_blank" href="https://en.wikipedia.org/wiki/Channel_Definition_Format">Channel Definition Format</a> only supported intervals in minutes and days, lacking support for seconds. This limitation meant that the smallest synchronization interval I could achieve was one minute, which was too slow for my needs.</p>
+
+<p>That's when I came up with the idea of implementing the content update by using an Ajax call. This involved fetching a txt file containing monitoring data, parsing its contents, and dynamically updating the webpage elements. This approach proved effective, allowing me to achieve refresh rates as frequent as once per second. To ensure data accuracy, I had to bypass caching by appending a version parameter hack to each HTTP GET call to the text file.</p>
+        <img src="./screenshot5.png">
+
+        <h4>No Way To Retrieve CPU Usage</h4>
+<p>Retrieving CPU information, memory usage, and HDD statistics was straightforward, but monitoring CPU usage proved challenging. Typically, this is done using the pdh.dll API, but I couldn't locate a compatible version for Windows 98 despite extensive searching. Attempting to implement the feature without PDH led to issues with missing C++ header files and other dependencies.</p>
+
+<p>With time constraints pressing, I made the decision to defer this feature for future releases of the project.</p>
+
+<p>As a final result of the redesign, I ended up with using the following components:
+</p><ul>
+	<li>Microsoft Personal Web Server</li>
+	<li>Microsoft Active Desktop</li>
+	<li>ActiveXObject</li>
+	<li>Windows Kernel</li>
+</ul><p></p>
+
+        <h4>The Development Experience: Then and Now</h4>
+	<p>Returning to the Borland C++ IDE was a mixed experience. The editor felt rudimentary, lacking many conveniences we now take for granted. Nevertheless, it remained functional, offering insights into the joys and challenges of programming in the 90s. I also utilized it for editing my HTML files.</p>
+
+        <h4>Challenges and Limitations</h4>
+<p>Working within the constraints of a 90s software environment presented several challenges:
+
+</p><ul>
+<li>Stability Issues: Frequent crashes were a reminder of early Windows versions' instability. While the infamous Blue Screen of Death (BSOD) wasn't common, Borland C++ crashed multiple times.</li>
+
+<li>Limited Tooling: The absence of modern development tools like Git made version control and collaboration difficult. Lack of advanced debugging and profiling tools necessitated a more manual problem-solving approach.</li>
+
+<li>Low Speed: Due to issues with LAN driver installation, I resorted to using USB flash drives for transferring source code, drivers, and components. The nusb36e.exe driver package proved useful, but file transfers were sluggish, sometimes taking over 40 minutes, particularly when moving the Borland C++ compiler files.</li>
+</ul><p></p>
+        <img src="./screenshot2.png">
+        <img src="./screenshot4.png">
+
+        <h4>Conclusion</h4>
+        <p>Developing a monitoring tool for Windows 98 using Borland C++ and other technologies from that era was both nostalgic and enlightening. It brought a renewed appreciation for the evolution of software development and a profound respect for the pioneers who paved the way for today's technologies. It seems we'll need some of the old tricks in near future. For those interested, you can download the source code from the following <a target="_blank" href="https://github.com/gospodinbodurov/windows98-monitoring-tool">GitHub repository</a> and explore it yourself.</p>
+        
+    <p>You can see the resulting component on the following gif.</p>
+        <img src="./recording.gif">
+
+        <p>Feel free to share your comments and suggestions via email at <a href="mailto:gospodin@bodurov.net">gospodin@bodurov.net</a>.</p>
+        
+        <p>You have a start-up? <a target="_blank" href="https://www.s-3.team/">We can help!</a></p>
+
+        <p><a target="_blank" href="https://bodurov.net/">Back to home</a></p>
+
+    <p>P.S. Photos of the hardware.</p>
+
+        <img src="./image3.jpg">
+        <img src="./image4.jpg">
+    </div>
+
+
+
+
+</body></html>
