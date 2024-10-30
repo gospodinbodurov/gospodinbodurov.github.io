@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience outranks everything</title>
+    <style>
+	body { 
+	  line-height: 1.4;
+	    font-size: 16px;
+	    padding: 0 10px;
+	    margin: 50px auto;
+	    max-width: 650px;
+	}
+
+	#maincontent
+	{
+	max-width:42em;margin:15 auto;
+
+	}
+	
+	img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.portrait {
+    height: 80px;
+    width: 30px;
+}
+
+.landscape {
+    height: 30px;
+    width: 80px;
+}
+
+.square {
+    height: 75px;
+    width: 75px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Experience outranks everything</h2>
+        
+        <h4>Introduction</h4>
+<p>Since I was 16, I’ve been working with start-ups, and I’ve noticed a pattern over and over again: Start-Up founders often think technical debt is something to deal with “later.” This mindset showed up in my earliest projects—from my first client, a construction firm in Plovdiv back in 2006, to a Scottish start-up in 2008 that wanted to be the “Facebook for immigrants.” They, like many others, kicked things off with simple, quick tech choices—using PHP and MySQL. That worked fine at first, but it eventually slowed them down, costing time and resources to fix.</p>
+
+<p>From working with about 30 start-ups, I’ve seen that this ‘deal with it later’ mentality often leads to bigger problems, especially when they start needing to scale. Most teams begin with SQL and fast-track things using C#, Java, PHP, NodeJS, or Python. But as they grow, they start drowning in technical debt—hastily built code and systems that constantly need patching, making growth a real challenge. The tech stack that helped them get started ends up holding them back.</p>
+
+<h4>Write code for humans, not just machines</h4>
+<p>For early-stage start-ups, <b>staying agile, cost-effective, and quick to innovate is everything</b>. Your start-up has to be easy to manage and ready to pivot to different markets or ideas. It’s pretty normal to start with one idea, then find yourself selling something completely different down the line. In those moments, you need to stay flexible and fast. Building infrastructure in a “quick and agile” way might seem tempting, but it often backfires big time. As a founder, you often face a choice: either lock yourself into a pre-built framework or roll your own system, which can end up low-quality and still tie you down to a specific tech stack.</p>
+
+<img src="./too-busy.png">
+<p><i>Attribution to <a target = "_blank" href = "https://www.flickr.com/photos/toddle_email_newsletters/15599597515/">https://www.flickr.com/photos/toddle_email_newsletters/15599597515/</a></i></p>
+
+<p>Here’s a real-world example: imagine a micro-SaaS company using PHP and SQL on a single server, managing 200 users, each uploading 10 files a day. It might seem fine at first, but this setup is a ticking time bomb when it comes to scaling. Recently, a crypto malware attack hit them hard, and they lost 60GB of customer data because the system wasn’t built for resilience, and the backups couldn’t keep up with the sheer amount of data stored per day. 
+Starting simple wasn’t the issue—the real problem was assuming a quick fix could handle fast growth without a scalable foundation.</p>
+
+<h4>World care about results, not efforts.</h4>
+<p>There is a reason big companies such as Microsoft pour tons of resources into <a target = "_blank" href = "https://learn.microsoft.com/en-us/azure/architecture/patterns/">cloud-native design</a>: it gives you a solid way to build scalable, resilient systems without needing to constantly redo everything. But for start-ups, it’s tough. Technical founders often either stick to what they used before (which doesn’t always work for a smaller team) or try to reinvent the wheel. </p>
+
+<p>Even if you know cloud-native inside and out, you’re often stuck leaving past work behind because of intellectual property laws—what you built belongs to your previous company. This applies to everyone, whether it’s a first-time founder or a seasoned entrepreneur. For less experienced developers, it’s even tougher; the steep learning curve of cloud-native eats up time and focus that could be spent on the actual product.</p>
+
+<p>This ‘learning as you go’ approach often means more quick fixes, failed demos, higher costs, and less happy customers.</p>
+
+<h4>Impossible is nothing</h4>
+<p>I’ve been lucky to work with two start-ups in the aviation industry, and both were fantastic experiences. The first one was a flight search engine where we went up against big names like Amadeus, Worldspan, and ITA (which eventually became Google Flights). The second was all about improving fuel efficiency for aircraft, and we got to work with awesome companies like Pratt and Whitney and the Thomas Cook Group. Those experiences sparked my passion for aviation, and I’ve been following the industry ever since.</p>
+
+<p>A lot has changed in modern jet fighters, too. Gone are the days when they just had single-purpose systems—like a simple SQL database and PHP server setup. Today’s fighters need to be jacks-of-all-trades, handling everything from air superiority missions to bombing runs and even coordinating drone swarms. Take a look at the F-35, Dassault Rafale, or SAAB Gripen if you're interested; they’re great examples. And a big focus now is reducing the crew needed to operate these machines. The Gripen, for instance, can be launched from regular roads and only needs two people to maintain and support it—pretty impressive for such a jet fighter!</p>
+
+<h4>Standing on the shoulders of giants</h4>
+<p>Same is about to happen in the Start-Up industry. The days of picking one platform, building something, getting customers, and figuring out the future as you go are long gone. Start-ups now need to think about scaling and resilience from the get-go and make these part of their business plan.</p>
+
+<p>There’s a saying in engineering about “standing on the shoulders of giants,” meaning we should build on what others have already figured out. For start-ups, that means reusing as many existing tools as possible and focusing energy on their core product. But honestly, I still see very few start-ups actually starting out with cloud-native architecture or using cloud-native frameworks.</p>
+
+<p>The real issue? There just aren’t enough solid platforms built specifically for start-ups. And while the media keeps drilling it into founders to focus only on product, they’re missing the point: credibility in tech is all about building something that’s rock-solid, resilient, and ready to scale aka showing how big is your tech.</p>
+
+<h4>Conclusion</h4>
+<p>Going cloud-native from day one might seem like a bigger upfront cost, but it’s your best defense against problems that can weigh your company down. With a focus on scalability, resilience, and flexibility, you're setting yourself up to grow, dodge expensive technology lock-ins, and stay nimble for whatever the market throws your way.</p>
+
+<p>Building on our experience in the aviation industry and responding to emerging trends, we designed <a href = "https://www.s-3.team/initiatives/platform.html">our platform</a> for resilience, minimal maintenance, and streamlined manpower requirements. With just <b>two full-stack developers</b>, your team can manage all your business logic, backend, DevOps, and infrastructure needs. This way we can support you all the way through your start-up journey. 
+</p> 
+
+        <p>Feel free to share your comments and suggestions via email at <a href ="mailto: gospodin@bodurov.net">gospodin@bodurov.net</a>.</p>
+        
+        <p>You have a start-up? <a target = "_blank" href ="https://www.s-3.team">We can help!</a></p>
+
+        <p><a target = "_blank" href ="https://bodurov.net">Back to home</a></p>
+
+    </div>
+</body>
+</html>
+
